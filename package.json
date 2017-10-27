@@ -1,0 +1,52 @@
+{
+  "name": "spleen-elasticsearch",
+  "longName": "spleen-elasticsearch",
+  "description": "Convert spleen filters into Elasticsearch queries.",
+  "version": "1.0.0",
+  "dependencies": {
+    "elv": "^2.0.0",
+    "spleen": "^1.3.0"
+  },
+  "devDependencies": {
+    "chai": "~3.5.0",
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
+    "mocha": "^3.2.0",
+    "nyc": "^10.2.0"
+  },
+  "keywords": [
+    "conditional",
+    "filter",
+    "graph",
+    "query",
+    "dynamic",
+    "if",
+    "where",
+    "search",
+    "api",
+    "input",
+    "param",
+    "elastic",
+    "search",
+    "elasticsearch",
+    "lucene"
+  ],
+  "license": "MIT",
+  "main": "./lib",
+  "peerDependencies": {
+    "spleen": ">=1.3.0"
+  },
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dsfields/spleen-elasticsearch-node"
+  },
+  "scripts": {
+    "lint": "eslint ./*",
+    "test": "NODE_ENV=test nyc --reporter=lcov  --reporter=text mocha --recursive ./test/unit",
+    "test:integration": "sh ./test/integration/services/run.sh && NODE_ENV=test nyc --reporter=lcov  --reporter=text mocha ./test/integration"
+  }
+}
