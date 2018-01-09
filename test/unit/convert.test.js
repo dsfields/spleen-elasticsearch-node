@@ -1427,15 +1427,15 @@ describe('#convert', function() {
   });
 
   it('adds regex for target like string', function() {
-    const regex = '^.*Hello World.{1}$';
+    const regex = '.*Hello World.{1}';
     const parseResult = spleen.parse('/foo/bar like "*Hello World_"');
     const { value } = parseResult;
     const result = convert(value);
     const { filter } = result.value;
     assert.isArray(filter.bool.must);
     assert.lengthOf(filter.bool.must, 1);
-    assert.isObject(filter.bool.must[0].regex);
-    assert.strictEqual(filter.bool.must[0].regex['foo.bar'], regex);
+    assert.isObject(filter.bool.must[0].regexp);
+    assert.strictEqual(filter.bool.must[0].regexp['foo.bar'], regex);
   });
 
   it('throws if like object not Like', function() {
@@ -1457,7 +1457,7 @@ describe('#convert', function() {
   });
 
   it('adds must_not regex for target nlike string', function() {
-    const regex = '^.*Hello World.{1}$';
+    const regex = '.*Hello World.{1}';
     const { value } = spleen.parse('/foo/bar nlike "*Hello World_"');
     const result = convert(value);
     const { filter } = result.value;
@@ -1465,9 +1465,9 @@ describe('#convert', function() {
     assert.lengthOf(filter.bool.must, 1);
     assert.isObject(filter.bool.must[0].bool);
     assert.isObject(filter.bool.must[0].bool.must_not);
-    assert.isObject(filter.bool.must[0].bool.must_not.regex);
+    assert.isObject(filter.bool.must[0].bool.must_not.regexp);
     assert.strictEqual(
-      filter.bool.must[0].bool.must_not.regex['foo.bar'],
+      filter.bool.must[0].bool.must_not.regexp['foo.bar'],
       regex
     );
   });
