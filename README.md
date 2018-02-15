@@ -149,8 +149,8 @@ Under the hood, Elasticsearch is utilizing the [Apache Lucene](https://lucene.ap
 | `nbetween` | `{ "bool": { "must_not": { "range": { "key": { "gte": "value1", "lte": "value2" } } } } }` |
 | `in`       | `{ "terms": { "key": ["value1", "value2", "valueN"] } }`         |
 | `nin`      | `{ "bool": { "must_not": { "terms": { "key": ["value1", "value2", "valueN"] } } } }` |
-| `like`     | `{ "regex": { "key": "like value converted to regex" } }` |
-| `nlike`    | `{ "bool": { "must_not": { "regex": { "key": "like value converted to regex" } } } }` |
+| `like`     | `{ "regexp": { "key": "like value converted to regex" } }` |
+| `nlike`    | `{ "bool": { "must_not": { "regexp": { "key": "like value converted to regex" } } } }` |
 
 ### Pattern Matching Conversion to Regex
 
@@ -161,7 +161,7 @@ Elasticsearch can perform pattern matching usig regular expressions.  The `splee
 | `*`         | `.*`           |
 | `_`         | `.{1}`         |
 
-All `like` statements converted to regex begin with `^` and `$`.  For example, the `like` pattern `*Hello World_` is converted into the regex `^.*Hello World.{1}$`.
+All `like` statements converted to regex begin with `^` and `$`.  For example, the `like` pattern `*Hello World_` is converted into the regex `.*Hello World.{1}`.
 
 ### Range Comparisons
 
