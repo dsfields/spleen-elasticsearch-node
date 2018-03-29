@@ -154,7 +154,7 @@ Under the hood, Elasticsearch is utilizing the [Apache Lucene](https://lucene.ap
 
 ### Pattern Matching Conversion to Regex
 
-Elasticsearch can perform pattern matching usig regular expressions.  The `spleen-elasticsearch` module converts `like` patterns to regex in the following way.
+Elasticsearch can perform pattern matching using regular expressions.  The `spleen-elasticsearch` module converts `like` patterns to regex in the following way.
 
 | `like` Char | Regex Operator |
 | ----------- | -------------- |
