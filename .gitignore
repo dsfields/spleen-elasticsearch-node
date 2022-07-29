@@ -30,3 +30,11 @@ node_modules
 # Project files
 .idea
 .project
+
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

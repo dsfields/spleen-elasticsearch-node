@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches:
+    - master
+    - 'release/**'
+  pull_request:
+    branches:
+    - master
+    - 'release/**'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Configure JFrog Artifactory
+        run: |
+          echo "npmRegistryServer: ${{ secrets.JFROG_ARTIFACTORY_NPM_VIRTUAL_URL }}" >> .yarnrc.yml
+          echo "npmAuthIdent: ${{ secrets.JFROG_ARTIFACTORY_DATA_LAKE_NPM_AUTH }}" >> .yarnrc.yml
+          echo "npmAlwaysAuth: true" >> .yarnrc.yml
+
+      - name: yarn install
+        run: yarn install  --immutable
+
+      - name: yarn test
+        run: yarn test     
+
+      - name: Upload coverage
+        uses: codacy/codacy-coverage-reporter-action@v1
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          coverage-reports: ./coverage/lcov.info
